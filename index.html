@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        code {
+            background-color: beige;
+            color: brown;
+        }
+        p > code {
+            display: block;
+        }
+        #div-1, #div-2, #div-0, #div-3 {
+            border: 1px solid black;
+            margin: 10px auto;
+        }
+        #div-1 > p {
+            background-color: greenyellow;
+        }
+        #div-2 + p {
+            background-color: red;
+        }
+        #div-1 ~ ul {
+            background-color: violet;
+        }
+        a p {
+            font-size: larger;
+        }
+    </style>
+    <title>CSS Combinators</title>
+</head>
+<body>
+    <h1>CSS Combinators ( > , + , ~ )</h1>
+    <p>Let's explore the 3 CSS Combinators:</p>
+    <ul>
+        <li><code>aa > bb</code> : selects a 'bb' element that is a child (at the child level only) of an 'aa' element. <span style="color:greenyellow">(green)</span></li>
+        <li><code>aa + bb</code> : selects a 'bb' element that is a <em>next</em> sibling of an 'aa' element. <span style="color: red;">(red)</span></li>
+        <li><code>aa ~ bb</code> : selects a 'bb' element that is a <em>general</em> next sibling of an 'aa' element. <span style="color: violet">(violet)</span></li>
+    </ul>
+
+    <div id="div-0">
+        <p>Example #1.<br>The rule applied is:
+            <code>
+                #div-1 > p {<br>
+                    background-color: greenyellow;<br>
+                }
+            </code>
+            The combinator acts on the next div, which contains 2 'p's, then 1 'a' which contains 1 'p' in itself, then 1 'nav' with a 'p' inside and finally 2 'p's.
+            As you can see, the background-color is applied only to the first 2 'p's.
+        </p>
+    </div>
+    <div id="div-1">
+        This is div with id 'div-1'. A green background-color is applied to any p child of '#div-1'. Note: applies only to children of '#div-1'!
+        <p>p1 in div-1</p>
+        <p>p2 in div-1</p>
+        <a href="#"><p>This text is inside a 'p', which is inside an 'a', in '#div-1': this 'p' is then not a direct child ('>') of #div-1, so it is not selected by <span><code>#div-1 > p</code></span>!</p></a>
+        <nav><p>This text is inside a 'p', which is inside a 'nav': again, it is not selected by the '>' combinator.</p></nav>
+        <p>this is selected, since it is a 'p' which is a direct child of '#div-1'.</p>
+        <p>As you can see, it doesn't matter if the ps are not the next element: they can be anywhere inside '#div-1', but they must be children, not nephew or else.</p>
+    </div>
+    <div id="div-2">
+        <p>Example #2. This is '#div-2'.
+            <code>
+                #div-2 + p {<br>
+                    background-color: red;<br>
+                }
+            </code>
+        </p>
+    </div>
+    <p>Next sibling of #div-2. Was selected by <span><code>#div-2 + p</code></span></p>
+    <div id="div-3">
+        <p>Example #3. This is '#div-3'.
+            <code>
+                #div-1 ~ ul {<br>
+                    background-color: violet;<br>
+                }
+            </code>
+        </p>
+    </div>
+    <ul>
+        <li>this 'ul' was selected by <code>#div-1 ~ ul</code></li>
+        <li>yesss</li>
+    </ul>
+    <p>A sibling of #div-1. Not affected by <span><code>#div-1 + p</code></span>, since it is not the <em>next</em> to it.</p>
+    <ul>
+        <li>this 'ul' was selected by <code>#div-1 ~ ul</code> as well</li>
+        <li>yesss</li>
+    </ul>
+</body>
+</html>
